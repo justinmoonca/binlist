@@ -33,6 +33,7 @@ func GetBinInfo(cardNumber string, proxyUrl string) (binInfo BinInfo, err error)
 	cardScheme := gjson.GetBytes(resBody, "scheme").String()
 	cardLevel := gjson.GetBytes(resBody, "brand").String()
 	country := gjson.GetBytes(resBody, "country.name").String()
+	bank := gjson.GetBytes(resBody, "bank.name").String()
 	datasource := "binlist.net"
 
 	if cardType == "" {
@@ -47,6 +48,7 @@ func GetBinInfo(cardNumber string, proxyUrl string) (binInfo BinInfo, err error)
 		cardScheme = gjson.GetBytes(resBody, "scheme").String()
 		cardLevel = gjson.GetBytes(resBody, "brand").String()
 		country = gjson.GetBytes(resBody, "country.name").String()
+		bank = gjson.GetBytes(resBody, "bank.name").String()
 		datasource = "binlist.io"
 	}
 
@@ -55,6 +57,7 @@ func GetBinInfo(cardNumber string, proxyUrl string) (binInfo BinInfo, err error)
 		CardScheme: cardScheme,
 		CardLevel:  cardLevel,
 		Country:    country,
+		Bank:       bank,
 		DataSource: datasource,
 	}, err
 }
